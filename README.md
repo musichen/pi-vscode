@@ -42,6 +42,10 @@ ext install webboxes.pivscode
 ovsx get webboxes.pivscode
 ```
 
+## Download releases
+
+Every tagged release is built by GitHub Actions and published with the VSIX attached. Download the latest VSIX from the [GitHub Releases page](https://github.com/musichen/pi-vscode/releases). Marketplace publication is currently performed manually by Webboxes.
+
 ## Updating Pi
 
 The extension's `Pi: Upgrade Pi and Packages` command upgrades the global CLI from `@earendil-works/pi-coding-agent@latest`, then runs `pi update` for installed Pi packages. To update manually:
