@@ -196,6 +196,48 @@
       section {
         padding: 75px 0;
         border-top: 1px solid #24314c;
+        scroll-margin-top: 82px;
+      }
+      .docs-layout {
+        display: grid;
+        grid-template-columns: 210px minmax(0, 1fr);
+        gap: 48px;
+        align-items: start;
+      }
+      .side-nav {
+        position: sticky;
+        top: 91px;
+        padding: 18px 0;
+        border-right: 1px solid var(--line);
+      }
+      .side-nav-label {
+        margin-bottom: 12px;
+        color: var(--muted);
+        font:
+          600 11px "JetBrains Mono",
+          monospace;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .side-nav a {
+        display: block;
+        padding: 8px 18px;
+        margin-right: -1px;
+        border-right: 2px solid transparent;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .side-nav a:hover,
+      .side-nav a:focus-visible {
+        color: var(--text);
+        background: #17223a88;
+      }
+      .side-nav a.active {
+        color: var(--green);
+        border-right-color: var(--green);
+      }
+      .docs-content section:first-child {
+        padding-top: 45px;
       }
       .section-heading {
         display: flex;
@@ -344,6 +386,34 @@
         nav {
           display: none;
         }
+        .docs-layout {
+          display: block;
+        }
+        .side-nav {
+          display: flex;
+          position: static;
+          overflow-x: auto;
+          gap: 4px;
+          padding: 10px 0;
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+        .side-nav-label {
+          display: none;
+        }
+        .side-nav a {
+          flex: 0 0 auto;
+          border-right: 0;
+          border-bottom: 2px solid transparent;
+          padding: 8px 12px;
+        }
+        .side-nav a.active {
+          border-right: 0;
+          border-bottom-color: var(--green);
+        }
+        .docs-content section:first-child {
+          padding-top: 40px;
+        }
         .hero,
         .install {
           grid-template-columns: 1fr;
@@ -411,158 +481,177 @@
 <span class="prompt">pi</span> <span class="cmd">›</span> make the tests pass</pre>
         </div>
       </section>
-      <section id="install">
-        <div class="section-heading">
-          <div>
-            <div class="eyebrow">01 / Get started</div>
-            <h2>Install in two minutes</h2>
-          </div>
-          <p>
-            Install Pi, install the extension, then open the Pi terminal from the status bar or
-            Command Palette.
-          </p>
+      <div class="docs-layout">
+        <aside class="side-nav" aria-label="Documentation sections">
+          <div class="side-nav-label">Documentation</div>
+          <a href="#install">Get started</a>
+          <a href="#features">Features</a>
+          <a href="#screenshots">Screenshots</a>
+          <a href="#search">Search docs</a>
+          <a href="#support">Support</a>
+        </aside>
+        <div class="docs-content">
+          <section id="install">
+            <div class="section-heading">
+              <div>
+                <div class="eyebrow">01 / Get started</div>
+                <h2>Install in two minutes</h2>
+              </div>
+              <p>
+                Install Pi, install the extension, then open the Pi terminal from the status bar or
+                Command Palette.
+              </p>
+            </div>
+            <div class="install">
+              <div class="card">
+                <strong>Step 1</strong>
+                <h3>Install the Pi CLI</h3>
+                <p>Use the current package from the official Pi project.</p>
+                <pre class="code">npm install --global @earendil-works/pi-coding-agent</pre>
+              </div>
+              <div class="card">
+                <strong>Step 2</strong>
+                <h3>Install pivscode</h3>
+                <p>Find <b>Pi Coding Agent - Webboxes</b> in the VS Code Marketplace.</p>
+                <pre class="code">ext install webboxes.pivscode</pre>
+              </div>
+            </div>
+          </section>
+          <section id="features">
+            <div class="section-heading">
+              <div>
+                <div class="eyebrow">02 / Why Pi</div>
+                <h2>Your editor is the context</h2>
+              </div>
+              <p>
+                The extension connects Pi to VS Code APIs through a local, authenticated bridge.
+              </p>
+            </div>
+            <div class="grid">
+              <article class="card">
+                <strong>Terminal first</strong>
+                <h3>Full Pi TUI</h3>
+                <p>
+                  Open Pi as a real integrated terminal with sessions, keyboard controls, and
+                  workspace-aware prompts.
+                </p>
+              </article>
+              <article class="card">
+                <strong>Live context</strong>
+                <h3>Editor awareness</h3>
+                <p>
+                  Read selections, diagnostics, symbols, references, open editors, and workspace
+                  folders from Pi.
+                </p>
+              </article>
+              <article class="card">
+                <strong>Safe actions</strong>
+                <h3>IDE-native edits</h3>
+                <p>
+                  Save files, format documents, apply workspace edits, and execute quick fixes while
+                  buffers stay synchronized.
+                </p>
+              </article>
+            </div>
+          </section>
+          <section id="screenshots">
+            <div class="section-heading">
+              <div>
+                <div class="eyebrow">03 / In the editor</div>
+                <h2>Built for a tight loop</h2>
+              </div>
+              <p>
+                The extension keeps the agent and the code side by side, with a live VS Code footer
+                status.
+              </p>
+            </div>
+            <img
+              class="screenshot"
+              src="assets/extension-overview.png"
+              alt="Pi Coding Agent extension running in VS Code"
+            />
+          </section>
+          <section id="search" x-data="docs()">
+            <div class="section-heading">
+              <div>
+                <div class="eyebrow">04 / Documentation</div>
+                <h2>Find an answer fast</h2>
+              </div>
+              <p>
+                Search setup, commands, bridge tools, and troubleshooting. Results update as you
+                type.
+              </p>
+            </div>
+            <label for="doc-search" class="eyebrow" style="display: block; margin-bottom: 10px"
+              >Fuzzy search documentation</label
+            ><input
+              id="doc-search"
+              class="search"
+              x-model="query"
+              placeholder="Try: diagnostics, package manager, sessions..."
+              autocomplete="off"
+            />
+            <div class="results">
+              <template x-for="item in filtered()" :key="item.title"
+                ><a class="result" :href="item.href"
+                  ><small x-text="item.category"></small>
+                  <div x-text="item.title"></div>
+                  <span style="color: var(--muted); font-size: 14px" x-text="item.text"></span></a
+              ></template>
+              <p x-show="query && !filtered().length">
+                No matching guide found. Try a shorter search.
+              </p>
+            </div>
+          </section>
+          <section id="support">
+            <div class="section-heading">
+              <div>
+                <div class="eyebrow">05 / Help</div>
+                <h2>Common questions</h2>
+              </div>
+              <p>
+                Still stuck? Open an issue and include your OS, VS Code version, and Pi version.
+              </p>
+            </div>
+            <div x-data="{open:null}">
+              <div class="faq">
+                <button @click="open = open === 1 ? null : 1">
+                  Pi is not detected <span x-text="open === 1 ? '−' : '+'"></span>
+                </button>
+                <p x-show="open === 1">
+                  Install <code>@earendil-works/pi-coding-agent</code> globally, or set the absolute
+                  path in Settings under <code>pi-vscode.path</code>.
+                </p>
+              </div>
+              <div class="faq">
+                <button @click="open = open === 2 ? null : 2">
+                  How do I update Pi? <span x-text="open === 2 ? '−' : '+'"></span>
+                </button>
+                <p x-show="open === 2">
+                  Run <code>Pi: Upgrade Pi and Packages</code> from the Command Palette. It upgrades
+                  Pi and runs <code>pi update</code>.
+                </p>
+              </div>
+              <div class="faq">
+                <button @click="open = open === 3 ? null : 3">
+                  Where can I report a bug? <span x-text="open === 3 ? '−' : '+'"></span>
+                </button>
+                <p x-show="open === 3">
+                  Use the
+                  <a style="color: var(--blue)" href="https://github.com/musichen/pi-vscode/issues"
+                    >GitHub issue tracker ↗</a
+                  >.
+                </p>
+              </div>
+            </div>
+            <div class="actions" style="margin-top: 28px">
+              <a class="button primary" href="https://github.com/musichen/pi-vscode/issues"
+                >Open an issue ↗</a
+              ><a class="button" href="https://web-boxes.com">Webboxes ↗</a>
+            </div>
+          </section>
         </div>
-        <div class="install">
-          <div class="card">
-            <strong>Step 1</strong>
-            <h3>Install the Pi CLI</h3>
-            <p>Use the current package from the official Pi project.</p>
-            <pre class="code">npm install --global @earendil-works/pi-coding-agent</pre>
-          </div>
-          <div class="card">
-            <strong>Step 2</strong>
-            <h3>Install pivscode</h3>
-            <p>Find <b>Pi Coding Agent - Webboxes</b> in the VS Code Marketplace.</p>
-            <pre class="code">ext install webboxes.pivscode</pre>
-          </div>
-        </div>
-      </section>
-      <section id="features">
-        <div class="section-heading">
-          <div>
-            <div class="eyebrow">02 / Why Pi</div>
-            <h2>Your editor is the context</h2>
-          </div>
-          <p>The extension connects Pi to VS Code APIs through a local, authenticated bridge.</p>
-        </div>
-        <div class="grid">
-          <article class="card">
-            <strong>Terminal first</strong>
-            <h3>Full Pi TUI</h3>
-            <p>
-              Open Pi as a real integrated terminal with sessions, keyboard controls, and
-              workspace-aware prompts.
-            </p>
-          </article>
-          <article class="card">
-            <strong>Live context</strong>
-            <h3>Editor awareness</h3>
-            <p>
-              Read selections, diagnostics, symbols, references, open editors, and workspace folders
-              from Pi.
-            </p>
-          </article>
-          <article class="card">
-            <strong>Safe actions</strong>
-            <h3>IDE-native edits</h3>
-            <p>
-              Save files, format documents, apply workspace edits, and execute quick fixes while
-              buffers stay synchronized.
-            </p>
-          </article>
-        </div>
-      </section>
-      <section id="screenshots">
-        <div class="section-heading">
-          <div>
-            <div class="eyebrow">03 / In the editor</div>
-            <h2>Built for a tight loop</h2>
-          </div>
-          <p>
-            The extension keeps the agent and the code side by side, with a live VS Code footer
-            status.
-          </p>
-        </div>
-        <img
-          class="screenshot"
-          src="assets/extension-overview.png"
-          alt="Pi Coding Agent extension running in VS Code"
-        />
-      </section>
-      <section id="search" x-data="docs()">
-        <div class="section-heading">
-          <div>
-            <div class="eyebrow">04 / Documentation</div>
-            <h2>Find an answer fast</h2>
-          </div>
-          <p>
-            Search setup, commands, bridge tools, and troubleshooting. Results update as you type.
-          </p>
-        </div>
-        <label for="doc-search" class="eyebrow" style="display: block; margin-bottom: 10px"
-          >Fuzzy search documentation</label
-        ><input
-          id="doc-search"
-          class="search"
-          x-model="query"
-          placeholder="Try: diagnostics, package manager, sessions..."
-          autocomplete="off"
-        />
-        <div class="results">
-          <template x-for="item in filtered()" :key="item.title"
-            ><a class="result" :href="item.href"
-              ><small x-text="item.category"></small>
-              <div x-text="item.title"></div>
-              <span style="color: var(--muted); font-size: 14px" x-text="item.text"></span></a
-          ></template>
-          <p x-show="query && !filtered().length">No matching guide found. Try a shorter search.</p>
-        </div>
-      </section>
-      <section id="support">
-        <div class="section-heading">
-          <div>
-            <div class="eyebrow">05 / Help</div>
-            <h2>Common questions</h2>
-          </div>
-          <p>Still stuck? Open an issue and include your OS, VS Code version, and Pi version.</p>
-        </div>
-        <div x-data="{open:null}">
-          <div class="faq">
-            <button @click="open = open === 1 ? null : 1">
-              Pi is not detected <span x-text="open === 1 ? '−' : '+'"></span>
-            </button>
-            <p x-show="open === 1">
-              Install <code>@earendil-works/pi-coding-agent</code> globally, or set the absolute
-              path in Settings under <code>pi-vscode.path</code>.
-            </p>
-          </div>
-          <div class="faq">
-            <button @click="open = open === 2 ? null : 2">
-              How do I update Pi? <span x-text="open === 2 ? '−' : '+'"></span>
-            </button>
-            <p x-show="open === 2">
-              Run <code>Pi: Upgrade Pi and Packages</code> from the Command Palette. It upgrades Pi
-              and runs <code>pi update</code>.
-            </p>
-          </div>
-          <div class="faq">
-            <button @click="open = open === 3 ? null : 3">
-              Where can I report a bug? <span x-text="open === 3 ? '−' : '+'"></span>
-            </button>
-            <p x-show="open === 3">
-              Use the
-              <a style="color: var(--blue)" href="https://github.com/musichen/pi-vscode/issues"
-                >GitHub issue tracker ↗</a
-              >.
-            </p>
-          </div>
-        </div>
-        <div class="actions" style="margin-top: 28px">
-          <a class="button primary" href="https://github.com/musichen/pi-vscode/issues"
-            >Open an issue ↗</a
-          ><a class="button" href="https://web-boxes.com">Webboxes ↗</a>
-        </div>
-      </section>
+      </div>
     </main>
     <footer>
       <div class="shell footer-row">
