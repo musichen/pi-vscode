@@ -1,6 +1,6 @@
 # pi-vscode
 
-[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/musichen.pi-vscode?label=VS%20Code%20Marketplace&color=blue)](https://marketplace.visualstudio.com/items?itemName=musichen.pi-vscode) [![Open VSX](https://img.shields.io/open-vsx/v/musichen/pi-vscode?label=Open%20VSX&color=purple)](https://open-vsx.org/extension/musichen/pi-vscode)
+[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/webboxes.pi-vscode?label=VS%20Code%20Marketplace&color=blue)](https://marketplace.visualstudio.com/items?itemName=webboxes.pi-vscode) [![Open VSX](https://img.shields.io/open-vsx/v/webboxes/pi-vscode?label=Open%20VSX&color=purple)](https://open-vsx.org/extension/webboxes/pi-vscode)
 
 Minimal VS Code extension for [pi coding agent](https://pi.dev/).
 
@@ -26,16 +26,16 @@ Minimal VS Code extension for [pi coding agent](https://pi.dev/).
 
 ## Install
 
-This fork uses the current Pi package, `@earendil-works/pi-coding-agent`. Existing users of the abandoned `pi0.pi-vscode` extension can uninstall that extension and install `musichen.pi-vscode`; Pi sessions and settings are preserved by VS Code.
+This fork uses the current Pi package, `@earendil-works/pi-coding-agent`. Existing users of the abandoned `pi0.pi-vscode` extension can uninstall that extension and install `webboxes.pi-vscode`; Pi sessions and settings are preserved by VS Code.
 
-Available on the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=musichen.pi-vscode) and [Open VSX](https://open-vsx.org/extension/musichen/pi-vscode):
+Available on the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=webboxes.pi-vscode) and [Open VSX](https://open-vsx.org/extension/webboxes/pi-vscode):
 
 ```bash
 # VS Code / Cursor
-ext install musichen.pi-vscode
+ext install webboxes.pi-vscode
 
 # Open VSX (VSCodium, etc.)
-ovsx get musichen.pi-vscode
+ovsx get webboxes.pi-vscode
 ```
 
 ## Updating Pi
@@ -117,9 +117,9 @@ These bridge tools let pi inspect selections, diagnostics, symbols, definitions,
 
 ## Publishing
 
-The extension metadata is configured for the `musichen` publisher and the `musichen/pi-vscode` GitHub repository. Before the first release:
+The extension metadata is configured for the `webboxes` publisher and the `musichen/pi-vscode` GitHub repository. Before the first release:
 
-1. Create or sign in to a [Visual Studio Marketplace publisher](https://marketplace.visualstudio.com/manage). The publisher ID must be `musichen`, or change `publisher` in `package.json` and the Marketplace badge/install IDs to your actual ID.
+1. Create or sign in to a [Visual Studio Marketplace publisher](https://marketplace.visualstudio.com/manage). The publisher ID must be `webboxes`, or change `publisher` in `package.json` and the Marketplace badge/install IDs to your actual ID.
 2. Create a Marketplace Personal Access Token with Marketplace **Manage** scope and save it in GitHub as the `VSCE_PAT` Actions secret.
 3. Create/sign in to an [Open VSX](https://open-vsx.org/) namespace matching the publisher ID, generate a token, and save it as the `OVSX_TOKEN` Actions secret.
 4. Push `main`, then create a version tag such as `v0.1.0` and push it. GitHub Actions packages and publishes the VSIX for tags beginning with `v`.
