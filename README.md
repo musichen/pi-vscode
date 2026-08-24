@@ -30,7 +30,7 @@ The setup guide, feature tour, screenshots, fuzzy documentation search, and trou
 
 ## Install
 
-This fork uses the current Pi package, `@earendil-works/pi-coding-agent`. Existing users of the abandoned `pi0.pi-vscode` extension can uninstall that extension and install `webboxes.pivscode`; Pi sessions and settings are preserved by VS Code.
+This extension uses the current Pi package, `@earendil-works/pi-coding-agent`. Install `webboxes.pivscode` from the Marketplace; Pi sessions and settings are preserved by VS Code.
 
 Available on the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=webboxes.pivscode) and [Open VSX](https://open-vsx.org/extension/webboxes/pivscode):
 

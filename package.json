@@ -1,7 +1,7 @@
 {
   "name": "pivscode",
   "displayName": "Pi Coding Agent - Webboxes",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Run the Pi coding agent inside VS Code with live editor context and safe IDE actions.",
   "categories": [
     "AI",
@@ -20,7 +20,7 @@
     "terminal",
     "vscode"
   ],
-  "homepage": "https://github.com/musichen/pi-vscode#readme",
+  "homepage": "https://musichen.github.io/pi-vscode/",
   "bugs": {
     "url": "https://github.com/musichen/pi-vscode/issues"
   },
