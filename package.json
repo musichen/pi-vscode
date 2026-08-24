@@ -1,0 +1,163 @@
+{
+  "name": "pi-vscode",
+  "displayName": "Pi Coding Agent",
+  "version": "0.0.9",
+  "description": "VS Code extension for pi coding agent",
+  "categories": [
+    "AI",
+    "Chat"
+  ],
+  "homepage": "https://github.com/musichen/pi-vscode#readme",
+  "bugs": {
+    "url": "https://github.com/musichen/pi-vscode/issues"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/musichen/pi-vscode"
+  },
+  "publisher": "musichen",
+  "type": "module",
+  "main": "./dist/extension.cjs",
+  "scripts": {
+    "build": "rolldown -c rolldown.config.ts",
+    "dev": "rolldown -c rolldown.config.ts -w",
+    "package": "pnpm build && pnpx @vscode/vsce package --no-dependencies",
+    "install-local": "pnpm package && code --install-extension *.vsix",
+    "release": "node scripts/release.ts",
+    "fmt": "oxlint . --fix && oxfmt .",
+    "lint": "oxlint . && oxfmt --check .",
+    "typecheck": "tsgo --noEmit --skipLibCheck",
+    "test": "pnpm lint && pnpm typecheck"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "@types/vscode": "^1.110.0",
+    "@typescript/native-preview": "^7.0.0-dev.20260320.1",
+    "@vscode/vsce": "^3.7.1",
+    "ovsx": "^0.10.9",
+    "oxfmt": "^0.41.0",
+    "oxlint": "^1.56.0",
+    "rolldown": "^1.0.0-rc.10",
+    "vitest": "^4.1.0"
+  },
+  "contributes": {
+    "icons": {
+      "pi-logo": {
+        "description": "Pi logo icon",
+        "default": {
+          "fontPath": "assets/fonts/pi-icons.woff2",
+          "fontCharacter": "\\F101"
+        }
+      }
+    },
+    "chatParticipants": [
+      {
+        "id": "pi-vscode.chat",
+        "fullName": "Pi Coding Agent",
+        "name": "pi",
+        "description": "Chat with Pi coding agent",
+        "isSticky": true
+      }
+    ],
+    "commands": [
+      {
+        "command": "pi-vscode.open",
+        "title": "Pi: Open",
+        "icon": {
+          "light": "assets/logo-light.svg",
+          "dark": "assets/logo.svg"
+        }
+      },
+      {
+        "command": "pi-vscode.openWithFile",
+        "title": "Pi: Open with File",
+        "icon": {
+          "light": "assets/logo-light.svg",
+          "dark": "assets/logo.svg"
+        }
+      },
+      {
+        "command": "pi-vscode.sendSelection",
+        "title": "Pi: Send Selection"
+      },
+      {
+        "command": "pi-vscode.upgrade",
+        "title": "Pi: Upgrade Pi and Packages"
+      },
+      {
+        "command": "pi-vscode.openInNewWindow",
+        "title": "Pi: Open in New Window",
+        "icon": {
+          "light": "assets/logo-light.svg",
+          "dark": "assets/logo.svg"
+        }
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "pi-vscode.openWithFile",
+          "group": "navigation"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "pi-vscode.openWithFile",
+          "group": "navigation"
+        }
+      ]
+    },
+    "terminal": {
+      "profiles": [
+        {
+          "id": "pi-vscode.terminal-profile",
+          "title": "Pi",
+          "icon": "pi-logo"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "pi",
+          "title": "Pi",
+          "icon": "assets/logo.svg"
+        }
+      ]
+    },
+    "views": {
+      "pi": [
+        {
+          "type": "webview",
+          "id": "pi-vscode.packages",
+          "name": "Packages"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Pi",
+      "properties": {
+        "pi-vscode.path": {
+          "type": "string",
+          "default": "",
+          "description": "Absolute path to the pi binary. Leave empty for auto-detection."
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "command": "pi-vscode.open",
+        "key": "ctrl+alt+3"
+      }
+    ]
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "icon": "assets/icon.png",
+  "engines": {
+    "vscode": "^1.110.0"
+  },
+  "packageManager": "pnpm@10.32.1"
+}
