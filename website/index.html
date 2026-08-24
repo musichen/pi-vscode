@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Pi Coding Agent for VS Code by Webboxes." />
+    <title>Pi Coding Agent for VS Code | Webboxes</title>
+    <link rel="icon" href="assets/icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+      :root {
+        --bg: #0b1020;
+        --panel: #121a2d;
+        --panel-2: #18233a;
+        --line: #293754;
+        --text: #f4f7fb;
+        --muted: #9eabc2;
+        --green: #35df86;
+        --blue: #72a7ff;
+        --orange: #ffb86b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        color: var(--text);
+        background: radial-gradient(circle at 80% -10%, #203965 0, transparent 38%), var(--bg);
+        font:
+          16px/1.6 "IBM Plex Sans",
+          sans-serif;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      button,
+      input {
+        font: inherit;
+      }
+      .shell {
+        max-width: 1180px;
+        margin: auto;
+        padding: 0 24px;
+      }
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        backdrop-filter: blur(16px);
+        background: #0b1020d9;
+        border-bottom: 1px solid #29375499;
+      }
+      .nav {
+        min-height: 68px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+      .brand img {
+        width: 30px;
+        height: 30px;
+      }
+      nav {
+        display: flex;
+        gap: 22px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      nav a:hover,
+      nav a:focus-visible {
+        color: var(--text);
+      }
+      .hero {
+        padding: 92px 0 70px;
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 55px;
+        align-items: center;
+      }
+      .eyebrow {
+        color: var(--green);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      h1 {
+        margin: 13px 0 18px;
+        max-width: 680px;
+        font-size: clamp(42px, 6vw, 76px);
+        line-height: 1.02;
+        letter-spacing: -0.06em;
+      }
+      h1 span {
+        color: var(--green);
+      }
+      .lead {
+        max-width: 610px;
+        margin: 0 0 28px;
+        color: var(--muted);
+        font-size: 19px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-height: 44px;
+        padding: 0 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        font-weight: 600;
+        transition:
+          transform 0.2s,
+          border-color 0.2s,
+          background 0.2s;
+      }
+      .button:hover,
+      .button:focus-visible {
+        transform: translateY(-2px);
+        border-color: var(--blue);
+      }
+      .button.primary {
+        color: #06121a;
+        background: var(--green);
+        border-color: var(--green);
+      }
+      .terminal {
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #080c16;
+        box-shadow: 0 25px 80px #0008;
+      }
+      .terminal-bar {
+        display: flex;
+        gap: 7px;
+        padding: 13px 16px;
+        border-bottom: 1px solid #202b43;
+        background: #10182a;
+      }
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #ff6b6b;
+      }
+      .dot:nth-child(2) {
+        background: #ffd166;
+      }
+      .dot:nth-child(3) {
+        background: #35df86;
+      }
+      pre {
+        margin: 0;
+        padding: 22px;
+        min-height: 255px;
+        color: #cbd6ed;
+        font:
+          13px/1.8 "JetBrains Mono",
+          monospace;
+      }
+      .prompt {
+        color: var(--green);
+      }
+      .comment {
+        color: #7384a6;
+      }
+      .cmd {
+        color: var(--blue);
+      }
+      section {
+        padding: 75px 0;
+        border-top: 1px solid #24314c;
+      }
+      .section-heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 20px;
+        margin-bottom: 28px;
+      }
+      h2 {
+        margin: 0;
+        font-size: 34px;
+        letter-spacing: -0.04em;
+      }
+      h3 {
+        margin: 8px 0;
+        font-size: 21px;
+      }
+      p {
+        color: var(--muted);
+      }
+      .section-heading p {
+        max-width: 490px;
+        margin: 0;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+      }
+      .card {
+        padding: 22px;
+        border: 1px solid var(--line);
+        border-radius: 11px;
+        background: linear-gradient(145deg, #17223a, #10172a);
+      }
+      .card strong {
+        display: block;
+        color: var(--green);
+        font:
+          600 12px "JetBrains Mono",
+          monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .screenshot {
+        width: 100%;
+        display: block;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        box-shadow: 0 18px 50px #0006;
+      }
+      .install {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+      .code {
+        position: relative;
+        margin: 0;
+        padding: 18px;
+        overflow: auto;
+        border: 1px solid var(--line);
+        border-radius: 9px;
+        background: #080c16;
+        color: #d6e1f7;
+        font:
+          13px/1.7 "JetBrains Mono",
+          monospace;
+      }
+      .copy {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 5px 9px;
+        border: 1px solid var(--line);
+        border-radius: 5px;
+        color: var(--muted);
+        background: #121a2d;
+        cursor: pointer;
+        font-size: 12px;
+      }
+      .search {
+        width: 100%;
+        padding: 15px 17px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        outline: 0;
+        color: var(--text);
+        background: #0c1425;
+      }
+      .search:focus {
+        border-color: var(--blue);
+        box-shadow: 0 0 0 3px #72a7ff22;
+      }
+      .results {
+        display: grid;
+        gap: 10px;
+        margin-top: 18px;
+      }
+      .result {
+        padding: 15px 17px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+      }
+      .result:hover {
+        border-color: var(--blue);
+      }
+      .result small {
+        color: var(--green);
+        font-family: "JetBrains Mono", monospace;
+      }
+      .faq {
+        border-bottom: 1px solid var(--line);
+      }
+      .faq button {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 18px 0;
+        border: 0;
+        color: var(--text);
+        background: none;
+        cursor: pointer;
+        text-align: left;
+        font-weight: 600;
+      }
+      .faq p {
+        margin: 0 0 18px;
+      }
+      footer {
+        padding: 35px 0 55px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      footer .footer-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+      }
+      :focus-visible {
+        outline: 3px solid #72a7ff;
+        outline-offset: 3px;
+      }
+      @media (max-width: 800px) {
+        nav {
+          display: none;
+        }
+        .hero,
+        .install {
+          grid-template-columns: 1fr;
+          padding-top: 62px;
+        }
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        .section-heading {
+          display: block;
+        }
+        .section-heading p {
+          margin-top: 10px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        html {
+          scroll-behavior: auto !important;
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body x-data="docs()">
+    <header>
+      <div class="shell nav">
+        <a class="brand" href="#top"
+          ><img src="assets/icon.png" alt="" /> Webboxes / Pi for VS Code</a
+        >
+        <nav aria-label="Main navigation">
+          <a href="#install">Install</a><a href="#features">Features</a><a href="#search">Docs</a
+          ><a href="#support">Support</a
+          ><a href="https://github.com/musichen/pi-vscode">GitHub ↗</a>
+        </nav>
+      </div>
+    </header>
+    <main id="top" class="shell">
+      <section class="hero" style="border: 0">
+        <div>
+          <div class="eyebrow">Webboxes developer tools</div>
+          <h1>Pi, right inside <span>VS Code.</span></h1>
+          <p class="lead">
+            A focused VS Code extension for the Pi coding agent. Keep the agent terminal beside your
+            editor, share live context, and make changes without leaving your workspace.
+          </p>
+          <div class="actions">
+            <a
+              class="button primary"
+              href="https://marketplace.visualstudio.com/items?itemName=webboxes.pivscode"
+              >Install from Marketplace ↗</a
+            ><a class="button" href="#install">Read the setup guide ↓</a>
+          </div>
+        </div>
+        <div class="terminal" aria-label="Example Pi terminal">
+          <div class="terminal-bar"><i class="dot"></i><i class="dot"></i><i class="dot"></i></div>
+          <pre><span class="comment">// your VS Code workspace</span>
+<span class="prompt">pi</span> <span class="cmd">›</span> inspect the active file
+
+<span class="comment">↳ VS Code bridge connected</span>
+<span class="comment">↳ diagnostics: 0 errors · 2 hints</span>
+<span class="prompt">✓</span> context ready
+<span class="prompt">pi</span> <span class="cmd">›</span> make the tests pass</pre>
+        </div>
+      </section>
+      <section id="install">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">01 / Get started</div>
+            <h2>Install in two minutes</h2>
+          </div>
+          <p>
+            Install Pi, install the extension, then open the Pi terminal from the status bar or
+            Command Palette.
+          </p>
+        </div>
+        <div class="install">
+          <div class="card">
+            <strong>Step 1</strong>
+            <h3>Install the Pi CLI</h3>
+            <p>Use the current package from the official Pi project.</p>
+            <pre class="code">npm install --global @earendil-works/pi-coding-agent</pre>
+          </div>
+          <div class="card">
+            <strong>Step 2</strong>
+            <h3>Install pivscode</h3>
+            <p>Find <b>Pi Coding Agent - Webboxes</b> in the VS Code Marketplace.</p>
+            <pre class="code">ext install webboxes.pivscode</pre>
+          </div>
+        </div>
+      </section>
+      <section id="features">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">02 / Why Pi</div>
+            <h2>Your editor is the context</h2>
+          </div>
+          <p>The extension connects Pi to VS Code APIs through a local, authenticated bridge.</p>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <strong>Terminal first</strong>
+            <h3>Full Pi TUI</h3>
+            <p>
+              Open Pi as a real integrated terminal with sessions, keyboard controls, and
+              workspace-aware prompts.
+            </p>
+          </article>
+          <article class="card">
+            <strong>Live context</strong>
+            <h3>Editor awareness</h3>
+            <p>
+              Read selections, diagnostics, symbols, references, open editors, and workspace folders
+              from Pi.
+            </p>
+          </article>
+          <article class="card">
+            <strong>Safe actions</strong>
+            <h3>IDE-native edits</h3>
+            <p>
+              Save files, format documents, apply workspace edits, and execute quick fixes while
+              buffers stay synchronized.
+            </p>
+          </article>
+        </div>
+      </section>
+      <section id="screenshots">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">03 / In the editor</div>
+            <h2>Built for a tight loop</h2>
+          </div>
+          <p>
+            The extension keeps the agent and the code side by side, with a live VS Code footer
+            status.
+          </p>
+        </div>
+        <img
+          class="screenshot"
+          src="assets/extension-overview.png"
+          alt="Pi Coding Agent extension running in VS Code"
+        />
+      </section>
+      <section id="search" x-data="docs()">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">04 / Documentation</div>
+            <h2>Find an answer fast</h2>
+          </div>
+          <p>
+            Search setup, commands, bridge tools, and troubleshooting. Results update as you type.
+          </p>
+        </div>
+        <label for="doc-search" class="eyebrow" style="display: block; margin-bottom: 10px"
+          >Fuzzy search documentation</label
+        ><input
+          id="doc-search"
+          class="search"
+          x-model="query"
+          placeholder="Try: diagnostics, package manager, sessions..."
+          autocomplete="off"
+        />
+        <div class="results">
+          <template x-for="item in filtered()" :key="item.title"
+            ><a class="result" :href="item.href"
+              ><small x-text="item.category"></small>
+              <div x-text="item.title"></div>
+              <span style="color: var(--muted); font-size: 14px" x-text="item.text"></span></a
+          ></template>
+          <p x-show="query && !filtered().length">No matching guide found. Try a shorter search.</p>
+        </div>
+      </section>
+      <section id="support">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">05 / Help</div>
+            <h2>Common questions</h2>
+          </div>
+          <p>Still stuck? Open an issue and include your OS, VS Code version, and Pi version.</p>
+        </div>
+        <div x-data="{open:null}">
+          <div class="faq">
+            <button @click="open = open === 1 ? null : 1">
+              Pi is not detected <span x-text="open === 1 ? '−' : '+'"></span>
+            </button>
+            <p x-show="open === 1">
+              Install <code>@earendil-works/pi-coding-agent</code> globally, or set the absolute
+              path in Settings under <code>pi-vscode.path</code>.
+            </p>
+          </div>
+          <div class="faq">
+            <button @click="open = open === 2 ? null : 2">
+              How do I update Pi? <span x-text="open === 2 ? '−' : '+'"></span>
+            </button>
+            <p x-show="open === 2">
+              Run <code>Pi: Upgrade Pi and Packages</code> from the Command Palette. It upgrades Pi
+              and runs <code>pi update</code>.
+            </p>
+          </div>
+          <div class="faq">
+            <button @click="open = open === 3 ? null : 3">
+              Where can I report a bug? <span x-text="open === 3 ? '−' : '+'"></span>
+            </button>
+            <p x-show="open === 3">
+              Use the
+              <a style="color: var(--blue)" href="https://github.com/musichen/pi-vscode/issues"
+                >GitHub issue tracker ↗</a
+              >.
+            </p>
+          </div>
+        </div>
+        <div class="actions" style="margin-top: 28px">
+          <a class="button primary" href="https://github.com/musichen/pi-vscode/issues"
+            >Open an issue ↗</a
+          ><a class="button" href="https://web-boxes.com">Webboxes ↗</a>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="shell footer-row">
+        <span>© Webboxes · Pi Coding Agent for VS Code</span
+        ><span
+          ><a href="https://github.com/musichen/pi-vscode">Source</a> ·
+          <a href="https://marketplace.visualstudio.com/items?itemName=webboxes.pivscode"
+            >Marketplace</a
+          ></span
+        >
+      </div>
+    </footer>
+    <script>
+      function docs() {
+        return {
+          query: "",
+          items: [
+            {
+              title: "Install Pi and pivscode",
+              category: "Setup",
+              text: "Install the CLI and VS Code extension.",
+              href: "#install",
+            },
+            {
+              title: "Use the Pi terminal",
+              category: "Commands",
+              text: "Open, focus, and send context to Pi.",
+              href: "#features",
+            },
+            {
+              title: "Inspect editor context",
+              category: "Bridge tools",
+              text: "Selections, diagnostics, symbols, and references.",
+              href: "#features",
+            },
+            {
+              title: "Apply safe workspace edits",
+              category: "Bridge tools",
+              text: "Formatting, saves, quick fixes, and edits.",
+              href: "#features",
+            },
+            {
+              title: "Upgrade Pi and packages",
+              category: "Maintenance",
+              text: "Keep the CLI and installed packages current.",
+              href: "#support",
+            },
+            {
+              title: "Pi binary not detected",
+              category: "Troubleshooting",
+              text: "Configure pi-vscode.path or install Pi globally.",
+              href: "#support",
+            },
+            {
+              title: "Report a bug",
+              category: "Support",
+              text: "Open a GitHub issue with environment details.",
+              href: "#support",
+            },
+          ],
+          filtered() {
+            const q = this.query.toLowerCase().trim();
+            if (!q) return this.items;
+            return this.items.filter((i) =>
+              (i.title + " " + i.category + " " + i.text)
+                .toLowerCase()
+                .split(/\s+/)
+                .some((word) => word.includes(q) || this.subsequence(q, word)),
+            );
+          },
+          subsequence(q, w) {
+            let p = 0;
+            for (const c of w) {
+              if (c === q[p]) p++;
+            }
+            return p === q.length;
+          },
+        };
+      }
+    </script>
+  </body>
+</html>

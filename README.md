@@ -1,8 +1,12 @@
 # pi-vscode
 
-[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/webboxes.pivscode?label=VS%20Code%20Marketplace&color=blue)](https://marketplace.visualstudio.com/items?itemName=webboxes.pivscode) [![Open VSX](https://img.shields.io/open-vsx/v/webboxes/pivscode?label=Open%20VSX&color=purple)](https://open-vsx.org/extension/webboxes/pivscode)
+[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/webboxes.pivscode?label=VS%20Code%20Marketplace&color=blue)](https://marketplace.visualstudio.com/items?itemName=webboxes.pivscode) [![Open VSX](https://img.shields.io/open-vsx/v/webboxes/pivscode?label=Open%20VSX&color=purple)](https://open-vsx.org/extension/webboxes/pivscode) [![Documentation](https://img.shields.io/badge/docs-GitHub%20Pages-35df86)](https://musichen.github.io/pi-vscode/)
 
 Minimal VS Code extension for [pi coding agent](https://pi.dev/).
+
+## Documentation website
+
+The setup guide, feature tour, screenshots, fuzzy documentation search, and troubleshooting FAQ are available at [musichen.github.io/pi-vscode](https://musichen.github.io/pi-vscode/). GitHub Actions deploys `website/` automatically whenever it changes on `main`.
 
 ## Features
 
