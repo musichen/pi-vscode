@@ -525,35 +525,6 @@
       </div>
     </header>
     <main id="top" class="shell">
-      <section class="hero" style="border: 0">
-        <div>
-          <div class="eyebrow">Webboxes developer tools</div>
-          <h1>Pi, right inside <span>VS Code.</span></h1>
-          <p class="lead">
-            A focused VS Code extension for the Pi coding agent. Keep the agent terminal beside your
-            editor, share live context, and make changes without leaving your workspace.
-          </p>
-          <div class="actions">
-            <a
-              class="button primary"
-              href="https://marketplace.visualstudio.com/items?itemName=webboxes.pivscode"
-              >Install from Marketplace ↗</a
-            ><a class="button" href="https://github.com/musichen/pi-vscode/releases"
-              >Download VSIX ↗</a
-            ><a class="button" href="#install">Read the setup guide ↓</a>
-          </div>
-        </div>
-        <div class="terminal" aria-label="Example Pi terminal">
-          <div class="terminal-bar"><i class="dot"></i><i class="dot"></i><i class="dot"></i></div>
-          <pre><span class="comment">// your VS Code workspace</span>
-<span class="prompt">pi</span> <span class="cmd">›</span> inspect the active file
-
-<span class="comment">↳ VS Code bridge connected</span>
-<span class="comment">↳ diagnostics: 0 errors · 2 hints</span>
-<span class="prompt">✓</span> context ready
-<span class="prompt">pi</span> <span class="cmd">›</span> make the tests pass</pre>
-        </div>
-      </section>
       <div class="docs-layout">
         <aside class="side-nav" aria-label="Documentation sections" x-data="{ active: 'install' }">
           <div class="side-nav-label">Documentation</div>
@@ -580,6 +551,37 @@
           >
         </aside>
         <div class="docs-content">
+          <section class="hero" style="border: 0">
+            <div>
+              <div class="eyebrow">Webboxes developer tools</div>
+              <h1>Pi, right inside <span>VS Code.</span></h1>
+              <p class="lead">
+                A focused VS Code extension for the Pi coding agent. Keep the agent terminal beside
+                your editor, share live context, and make changes without leaving your workspace.
+              </p>
+              <div class="actions">
+                <a
+                  class="button primary"
+                  href="https://marketplace.visualstudio.com/items?itemName=webboxes.pivscode"
+                  >Install from Marketplace ↗</a
+                ><a class="button" href="https://github.com/musichen/pi-vscode/releases"
+                  >Download VSIX ↗</a
+                ><a class="button" href="#install">Read the setup guide ↓</a>
+              </div>
+            </div>
+            <div class="terminal" aria-label="Example Pi terminal">
+              <div class="terminal-bar">
+                <i class="dot"></i><i class="dot"></i><i class="dot"></i>
+              </div>
+              <pre><span class="comment">// your VS Code workspace</span>
+<span class="prompt">pi</span> <span class="cmd">›</span> inspect the active file
+
+<span class="comment">↳ VS Code bridge connected</span>
+<span class="comment">↳ diagnostics: 0 errors · 2 hints</span>
+<span class="prompt">✓</span> context ready
+<span class="prompt">pi</span> <span class="cmd">›</span> make the tests pass</pre>
+            </div>
+          </section>
           <section id="install">
             <div class="section-heading">
               <div>
