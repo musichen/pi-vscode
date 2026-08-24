@@ -1,7 +1,7 @@
 {
   "name": "pivscode",
   "displayName": "Pi Coding Agent - Webboxes",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Run the Pi coding agent inside VS Code with live editor context and safe IDE actions.",
   "categories": [
     "AI",
