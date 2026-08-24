@@ -14,6 +14,9 @@
     />
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <style>
+      [x-cloak] {
+        display: none !important;
+      }
       :root {
         --bg: #0b1020;
         --panel: #121a2d;
@@ -83,6 +86,57 @@
         gap: 22px;
         color: var(--muted);
         font-size: 14px;
+      }
+      .top-search {
+        position: relative;
+        width: min(260px, 25vw);
+      }
+      .top-search input {
+        width: 100%;
+        padding: 8px 11px 8px 34px;
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        outline: 0;
+        color: var(--text);
+        background: #0c1425;
+        font-size: 13px;
+      }
+      .top-search input:focus {
+        border-color: var(--blue);
+        box-shadow: 0 0 0 3px #72a7ff22;
+      }
+      .top-search::before {
+        content: "/";
+        position: absolute;
+        left: 13px;
+        top: 5px;
+        color: var(--green);
+        font:
+          600 14px "JetBrains Mono",
+          monospace;
+        z-index: 1;
+      }
+      .top-search-results {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 0;
+        right: 0;
+        display: grid;
+        gap: 4px;
+        padding: 7px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        box-shadow: 0 15px 40px #0008;
+      }
+      .top-search-results a {
+        padding: 7px 9px;
+        border-radius: 5px;
+        font-size: 12px;
+      }
+      .top-search-results a:hover {
+        background: var(--panel-2);
+        color: var(--green);
       }
       nav a:hover,
       nav a:focus-visible {
@@ -383,7 +437,8 @@
         outline-offset: 3px;
       }
       @media (max-width: 800px) {
-        nav {
+        nav,
+        .top-search {
           display: none;
         }
         .docs-layout {
@@ -444,6 +499,24 @@
         <a class="brand" href="#top"
           ><img src="assets/icon.png" alt="" /> Webboxes / Pi for VS Code</a
         >
+        <div class="top-search" @keydown.escape="query = ''">
+          <input
+            x-model="query"
+            @keydown.enter.prevent="document.getElementById('search').scrollIntoView()"
+            aria-label="Search documentation"
+            placeholder="Search docs..."
+          />
+          <div class="top-search-results" x-show="query" x-cloak>
+            <template x-for="item in filtered().slice(0, 5)" :key="item.title"
+              ><a :href="item.href" @click="query = ''" x-text="item.title"></a
+            ></template>
+            <span
+              x-show="!filtered().length"
+              style="padding: 7px 9px; color: var(--muted); font-size: 12px"
+              >No results</span
+            >
+          </div>
+        </div>
         <nav aria-label="Main navigation">
           <a href="#install">Install</a><a href="#features">Features</a><a href="#search">Docs</a
           ><a href="#support">Support</a
@@ -482,13 +555,29 @@
         </div>
       </section>
       <div class="docs-layout">
-        <aside class="side-nav" aria-label="Documentation sections">
+        <aside class="side-nav" aria-label="Documentation sections" x-data="{ active: 'install' }">
           <div class="side-nav-label">Documentation</div>
-          <a href="#install">Get started</a>
-          <a href="#features">Features</a>
-          <a href="#screenshots">Screenshots</a>
-          <a href="#search">Search docs</a>
-          <a href="#support">Support</a>
+          <a href="#install" :class="{ active: active === 'install' }" @click="active = 'install'"
+            >Get started</a
+          >
+          <a
+            href="#features"
+            :class="{ active: active === 'features' }"
+            @click="active = 'features'"
+            >Features</a
+          >
+          <a
+            href="#screenshots"
+            :class="{ active: active === 'screenshots' }"
+            @click="active = 'screenshots'"
+            >Screenshots</a
+          >
+          <a href="#search" :class="{ active: active === 'search' }" @click="active = 'search'"
+            >Search docs</a
+          >
+          <a href="#support" :class="{ active: active === 'support' }" @click="active = 'support'"
+            >Support</a
+          >
         </aside>
         <div class="docs-content">
           <section id="install">
