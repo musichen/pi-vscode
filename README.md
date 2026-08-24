@@ -1,6 +1,6 @@
 # pi-vscode
 
-[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/webboxes.pivscode?label=VS%20Code%20Marketplace&color=blue)](https://marketplace.visualstudio.com/items?itemName=webboxes.pivscode) [![Documentation](https://img.shields.io/badge/docs-GitHub%20Pages-35df86)](https://musichen.github.io/pi-vscode/)
+[![Status: Active](https://img.shields.io/badge/status-active-22c55e)](https://marketplace.visualstudio.com/items?itemName=webboxes.pivscode) [![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/webboxes.pivscode?label=VS%20Code%20Marketplace&color=22c55e)](https://marketplace.visualstudio.com/items?itemName=webboxes.pivscode) [![Open VSX](https://img.shields.io/open-vsx/v/webboxes/pivscode?label=Open%20VSX&color=22c55e)](https://open-vsx.org/extension/webboxes/pivscode) [![Documentation](https://img.shields.io/badge/docs-GitHub%20Pages-35df86)](https://musichen.github.io/pi-vscode/)
 
 Minimal VS Code extension for [pi coding agent](https://pi.dev/).
 
@@ -32,13 +32,14 @@ The setup guide, feature tour, screenshots, fuzzy documentation search, and trou
 
 This extension uses the current Pi package, `@earendil-works/pi-coding-agent`. Install `webboxes.pivscode` from the Marketplace; Pi sessions and settings are preserved by VS Code.
 
-Available on the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=webboxes.pivscode). Open VSX publication is not enabled yet:
+Available on the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=webboxes.pivscode) and [Open VSX](https://open-vsx.org/extension/webboxes/pivscode):
 
 ```bash
 # VS Code / Cursor
 ext install webboxes.pivscode
 
-# Open VSX will be available after the Webboxes namespace is published
+# Open VSX / VSCodium
+ovsx get webboxes.pivscode
 ```
 
 ## Download releases
