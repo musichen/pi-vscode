@@ -119,16 +119,16 @@ Each pi terminal launched by the extension loads a bundled pi extension that can
 
 These bridge tools let pi inspect selections, diagnostics, symbols, definitions, declarations, implementations, hover/type info, workspace-wide symbol search, references, quick-fix availability, dirty state, and recent IDE events, while also safely opening files, saving buffers, applying workspace edits, formatting open buffers through VS Code providers, running VS Code code actions, and surfacing notifications back to the user.
 
-## Publishing
+## Maintainer publishing
 
-The extension metadata is configured for the `webboxes` publisher and the `musichen/pi-vscode` GitHub repository. Before the first release:
+The extension metadata is configured for the `webboxes` publisher and the `musichen/pi-vscode` GitHub repository. Maintainers publish tagged releases through GitHub Actions:
 
 1. Create or sign in to a [Visual Studio Marketplace publisher](https://marketplace.visualstudio.com/manage). The publisher ID must be `webboxes`, or change `publisher` in `package.json` and the Marketplace badge/install IDs to your actual ID.
 2. Create a Marketplace Personal Access Token with Marketplace **Manage** scope and save it in GitHub as the `VSCE_PAT` Actions secret.
 3. Create/sign in to an [Open VSX](https://open-vsx.org/) namespace matching the publisher ID, generate a token, and save it as the `OVSX_TOKEN` Actions secret.
 4. Push `main`, then create a version tag such as `v0.1.0` and push it. GitHub Actions packages and publishes the VSIX for tags beginning with `v`.
 
-Do not commit either token. If you want me to complete the release setup, provide the confirmed Marketplace publisher ID and tell me when the two GitHub Actions secrets are configured. Tokens should be entered only in GitHub's secret UI, not sent in chat.
+Do not commit either token. Tokens belong only in GitHub Actions secrets.
 
 ## Configuration
 

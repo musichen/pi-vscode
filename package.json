@@ -1,11 +1,24 @@
 {
   "name": "pivscode",
   "displayName": "Pi Coding Agent - Webboxes",
-  "version": "0.0.9",
-  "description": "VS Code extension for pi coding agent",
+  "version": "0.1.0",
+  "description": "Run the Pi coding agent inside VS Code with live editor context and safe IDE actions.",
   "categories": [
     "AI",
-    "Chat"
+    "Chat",
+    "Other"
+  ],
+  "keywords": [
+    "ai",
+    "chat-participant",
+    "code-actions",
+    "coding-agent",
+    "developer-tools",
+    "diagnostics",
+    "editor",
+    "pi",
+    "terminal",
+    "vscode"
   ],
   "homepage": "https://github.com/musichen/pi-vscode#readme",
   "bugs": {
