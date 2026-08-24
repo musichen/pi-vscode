@@ -1,6 +1,6 @@
 # pi-vscode
 
-[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/webboxes.pi-vscode?label=VS%20Code%20Marketplace&color=blue)](https://marketplace.visualstudio.com/items?itemName=webboxes.pi-vscode) [![Open VSX](https://img.shields.io/open-vsx/v/webboxes/pi-vscode?label=Open%20VSX&color=purple)](https://open-vsx.org/extension/webboxes/pi-vscode)
+[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/webboxes.pivscode?label=VS%20Code%20Marketplace&color=blue)](https://marketplace.visualstudio.com/items?itemName=webboxes.pivscode) [![Open VSX](https://img.shields.io/open-vsx/v/webboxes/pivscode?label=Open%20VSX&color=purple)](https://open-vsx.org/extension/webboxes/pivscode)
 
 Minimal VS Code extension for [pi coding agent](https://pi.dev/).
 
@@ -26,16 +26,16 @@ Minimal VS Code extension for [pi coding agent](https://pi.dev/).
 
 ## Install
 
-This fork uses the current Pi package, `@earendil-works/pi-coding-agent`. Existing users of the abandoned `pi0.pi-vscode` extension can uninstall that extension and install `webboxes.pi-vscode`; Pi sessions and settings are preserved by VS Code.
+This fork uses the current Pi package, `@earendil-works/pi-coding-agent`. Existing users of the abandoned `pi0.pi-vscode` extension can uninstall that extension and install `webboxes.pivscode`; Pi sessions and settings are preserved by VS Code.
 
-Available on the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=webboxes.pi-vscode) and [Open VSX](https://open-vsx.org/extension/webboxes/pi-vscode):
+Available on the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=webboxes.pivscode) and [Open VSX](https://open-vsx.org/extension/webboxes/pivscode):
 
 ```bash
 # VS Code / Cursor
-ext install webboxes.pi-vscode
+ext install webboxes.pivscode
 
 # Open VSX (VSCodium, etc.)
-ovsx get webboxes.pi-vscode
+ovsx get webboxes.pivscode
 ```
 
 ## Updating Pi

@@ -1,6 +1,6 @@
 {
-  "name": "pi-vscode",
-  "displayName": "Pi Coding Agent",
+  "name": "pivscode",
+  "displayName": "Pi Coding Agent - Webboxes",
   "version": "0.0.9",
   "description": "VS Code extension for pi coding agent",
   "categories": [
