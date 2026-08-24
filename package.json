@@ -41,7 +41,7 @@
     "fmt": "oxlint . --fix && oxfmt .",
     "lint": "oxlint . && oxfmt --check .",
     "typecheck": "tsgo --noEmit --skipLibCheck",
-    "test": "pnpm lint && pnpm typecheck"
+    "test": "pnpm lint && pnpm typecheck && vitest run"
   },
   "devDependencies": {
     "@types/node": "^25.5.0",
