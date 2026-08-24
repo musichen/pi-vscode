@@ -1,6 +1,6 @@
 # pi-vscode
 
-[![Status: Active](https://img.shields.io/badge/status-active-22c55e)](https://marketplace.visualstudio.com/items?itemName=webboxes.pivscode) [![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/webboxes.pivscode?label=VS%20Code%20Marketplace&color=22c55e)](https://marketplace.visualstudio.com/items?itemName=webboxes.pivscode) [![Open VSX](https://img.shields.io/open-vsx/v/webboxes/pivscode?label=Open%20VSX&color=22c55e)](https://open-vsx.org/extension/webboxes/pivscode) [![Documentation](https://img.shields.io/badge/docs-GitHub%20Pages-35df86)](https://musichen.github.io/pi-vscode/)
+[![Status: Active](https://img.shields.io/badge/status-active-22c55e)](https://marketplace.visualstudio.com/items?itemName=webboxes.pivscode) [![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/webboxes.pivscode?label=VS%20Code%20Marketplace&color=22c55e)](https://marketplace.visualstudio.com/items?itemName=webboxes.pivscode) [![Documentation](https://img.shields.io/badge/docs-GitHub%20Pages-35df86)](https://musichen.github.io/pi-vscode/)
 
 Minimal VS Code extension for [pi coding agent](https://pi.dev/).
 
@@ -32,14 +32,13 @@ The setup guide, feature tour, screenshots, fuzzy documentation search, and trou
 
 This extension uses the current Pi package, `@earendil-works/pi-coding-agent`. Install `webboxes.pivscode` from the Marketplace; Pi sessions and settings are preserved by VS Code.
 
-Available on the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=webboxes.pivscode) and [Open VSX](https://open-vsx.org/extension/webboxes/pivscode):
+Available on the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=webboxes.pivscode):
 
 ```bash
 # VS Code / Cursor
 ext install webboxes.pivscode
 
-# Open VSX / VSCodium
-ovsx get webboxes.pivscode
+# Download the VSIX from GitHub Releases for manual installation
 ```
 
 ## Download releases
@@ -129,8 +128,8 @@ The extension metadata is configured for the `webboxes` publisher and the `music
 
 1. Create or sign in to a [Visual Studio Marketplace publisher](https://marketplace.visualstudio.com/manage). The publisher ID must be `webboxes`, or change `publisher` in `package.json` and the Marketplace badge/install IDs to your actual ID.
 2. Create a Marketplace Personal Access Token with Marketplace **Manage** scope and save it in GitHub as the `VSCE_PAT` Actions secret.
-3. Create/sign in to an [Open VSX](https://open-vsx.org/) namespace matching the publisher ID, generate a token, and save it as the `OVSX_TOKEN` Actions secret.
-4. Push `main`, then create a version tag such as `v0.1.0` and push it. GitHub Actions packages and publishes the VSIX for tags beginning with `v`.
+3. Push `main`, then create a version tag such as `v0.1.0` and push it. GitHub Actions packages the VSIX and creates a GitHub Release for tags beginning with `v`.
+4. Upload the VSIX from that GitHub Release manually to the VS Code Marketplace.
 
 Do not commit either token. Tokens belong only in GitHub Actions secrets.
 

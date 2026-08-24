@@ -29,8 +29,6 @@ const run = (cmd: string) => {
   execSync(cmd, { cwd: rootDir, stdio: "inherit" });
 };
 
-const isLocal = process.argv.includes("--local");
-
 // Clean old .vsix files
 for (const vsix of globSync("*.vsix", { cwd: rootDir })) {
   console.log(`Removing old ${vsix}`);
@@ -52,12 +50,5 @@ run(`git commit -m "v${nextVersion}"`);
 run(`git tag v${nextVersion}`);
 run(`git push`);
 run(`git push --tags`);
-
-// Publish locally if --local flag is passed
-if (isLocal) {
-  console.log(`\nPublishing ${vsixFile} locally...`);
-  run(`vsce publish --no-dependencies -i ${vsixFile}`);
-  run(`ovsx publish ${vsixFile}`);
-}
 
 console.log(`\n✅ Released v${nextVersion}`);
