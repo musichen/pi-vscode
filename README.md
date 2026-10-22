@@ -140,3 +140,7 @@ Do not commit either token. Tokens belong only in GitHub Actions secrets.
 | `pi-vscode.path` | `""`    | Absolute path to the pi binary (auto-detected if empty) |
 
 On Windows, an extensionless `pi-vscode.path` is auto-probed for `.cmd`/`.exe`/`.ps1` variants so extensionless npm shims work out of the box.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
